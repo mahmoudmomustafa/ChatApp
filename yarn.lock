@@ -1040,6 +1040,11 @@
   dependencies:
     "@types/hammerjs" "^2.0.36"
 
+"@expo-google-fonts/mansalva@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/mansalva/-/mansalva-0.1.0.tgz#859547405abdac69dc61f75a299e01f3bc10c627"
+  integrity sha512-7ct6Xieyo7mmqx23oBBwCiXJbL7cyeGCu6I3ei/LjF+U09tQ8gMUhAAakSy+PcIDHBe6zWHplr2XqGvjVHHWQA==
+
 "@expo/babel-preset-cli@0.2.18":
   version "0.2.18"
   resolved "https://registry.yarnpkg.com/@expo/babel-preset-cli/-/babel-preset-cli-0.2.18.tgz#136acf8a0efe259e29ebc614b68552e5acb47d86"
