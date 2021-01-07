@@ -20,27 +20,27 @@ const SliderPage = ({ navigation }) => {
 
          <View style={styles.sliderContainer}>
             <FirstImageSlider wdith={400} height={400} />
-            <Text style={[Styles.mediumText, Styles.header]}>Haaa !!</Text>
+            <Text style={[Styles.span, Styles.header]}>Haaa !!</Text>
          </View>
 
          <View style={styles.sliderContainer}>
             <SecondImageSlider wdith={400} height={400} />
-            <Text style={[Styles.mediumText, Styles.header]}>Waait wait wait..</Text>
-            <Text style={[Styles.mediumText, Styles.header]}>Hi!</Text>
-            <Text style={[Styles.mediumText, Styles.header]}>Welcome To Chat app.</Text>
+            <Text style={[Styles.span, Styles.header]}>Waait wait wait..</Text>
+            <Text style={[Styles.span, Styles.header]}>Hi!</Text>
+            <Text style={[Styles.span, Styles.header]}>Welcome To Chat app.</Text>
          </View>
 
 
          <View style={styles.sliderContainer}>
             <ThirdImageSlider wdith={400} height={400} />
-            <Text style={[Styles.mediumText, Styles.header, { marginBottom: 15 }]}>Ready to try it?!</Text>
+            <Text style={[Styles.span, Styles.header, { marginBottom: 15 }]}>Ready to try it?!</Text>
 
             <ButtonComponent filled text="Sign Up"
-               btnStyle={{ width: 150 }}
+               btnStyle={{ width: 150 }} 
                handle={() => handleNavigation('SignUp')} />
 
             <ButtonComponent filled text="Sign In"
-               btnStyle={{ width: 150 }}
+               btnStyle={{ width: 150 }} 
                handle={() => handleNavigation('SignIn')} />
 
          </View>

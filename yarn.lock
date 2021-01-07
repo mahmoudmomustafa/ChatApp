@@ -1045,6 +1045,16 @@
   resolved "https://registry.yarnpkg.com/@expo-google-fonts/mansalva/-/mansalva-0.1.0.tgz#859547405abdac69dc61f75a299e01f3bc10c627"
   integrity sha512-7ct6Xieyo7mmqx23oBBwCiXJbL7cyeGCu6I3ei/LjF+U09tQ8gMUhAAakSy+PcIDHBe6zWHplr2XqGvjVHHWQA==
 
+"@expo-google-fonts/redressed@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/redressed/-/redressed-0.1.0.tgz#624a7d0942d304baade08622533869bd3ac52cf2"
+  integrity sha512-bRmjMmVbu6qcP6sARDTmIv1EqdDZnjc1qFlyUPHDCfoh4T2p9ZayTOD7JufsmpJZEqnf+ZEcxXOfiY6MFEMrWQ==
+
+"@expo-google-fonts/roboto@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/roboto/-/roboto-0.1.0.tgz#2897dc09db4ceb9f5ba337103090e1d70236e811"
+  integrity sha512-q+68xWZpLIS/iPC5jwoakEskyTVgIC1jfpNzWFMnUnBoZsWRq1rlpnleR3MjKDeN1Vt0NcvUI/aaZoCyIXhisw==
+
 "@expo/babel-preset-cli@0.2.18":
   version "0.2.18"
   resolved "https://registry.yarnpkg.com/@expo/babel-preset-cli/-/babel-preset-cli-0.2.18.tgz#136acf8a0efe259e29ebc614b68552e5acb47d86"

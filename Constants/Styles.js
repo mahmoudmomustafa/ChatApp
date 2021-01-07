@@ -1,25 +1,29 @@
 import Colors from "./Colors";
 
 export default {
+   span:{
+      fontFamily:'Redressed_Regular',
+      fontWeight : '400',
+   },
    lightText:{
       fontWeight : '100',
-      fontFamily:'Mansalva_Regular'
+      fontFamily:'Roboto_Thin'
    },
    mediumText:{
-      fontWeight : '500',
-      fontFamily:'Mansalva_Regular'
+      fontWeight : '400',
+      fontFamily:'Roboto_Regular'
    },
    BoldText:{
       fontWeight : '800',
-      fontFamily:'Mansalva_Regular'
+      fontFamily:'Roboto_Black'
    },
    header:{
       fontSize:30,
       color:Colors.white
    },
    smallLink:{
-      fontFamily:'Mansalva_Regular',
-      fontSize: 11,
+      fontFamily:'Redressed_Regular',
+      fontSize: 15,
       textDecorationLine: 'underline'
    },
    flexRow:{

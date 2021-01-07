@@ -7,8 +7,8 @@ function SvgComponent(props) {
     <Svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 774.67 1143.97"
-      width="1em"
-      height="1em"
+      width={300}
+      height={220}
       {...props}
     >
       <G data-name="Layer 2">

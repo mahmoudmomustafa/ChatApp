@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import InputComponent from '../../components/InputComponent/InputComponent';
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import Colors from '../../Constants/Colors';
@@ -10,6 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Styles from '../../Constants/Styles';
 import { Octicons } from '@expo/vector-icons';
+import SignUpImage from '../../components/Icons/SignUpImage';
 const RegisterSchme = yup.object().shape({
    username: yup.string().min(4).required("username is required"),
    email: yup.string().email('Email address is invalid.').required("Email Address is required"),
@@ -31,7 +32,16 @@ const SignUp = ({ navigation }) => {
 
    return (
       <ScrollView style={styles.container}>
-         <View style={{ padding: 16 }}>
+         <View style={{ padding: 16, justifyContent: 'space-evenly', height: Dimensions.get('screen').height - 42 }}>
+
+            <View>
+               <Text style={[{ fontSize: 35, color: Colors.white, paddingVertical: 5 }, Styles.BoldText]}>Create a new account.</Text>
+            </View>
+
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+               <SignUpImage />
+            </View>
+
             <View>
                {/* name input */}
                <Controller
@@ -102,24 +112,23 @@ const SignUp = ({ navigation }) => {
                      />
                   )}
                />
-
-               <ButtonComponent filled
-                  btnStyle={{ paddingVertical: 15 }}
-                  text="Sign up" handle={handleSubmit(handelRegister)}
-                  submitLoading={isSubmitting} />
-
-               <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                  <Text style={[{ color: Colors.white, margin: 5 }, Styles.lightText]}>
-                     Already have an account?
-                  </Text>
-                  <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}} onPress={() => navigation.replace('SignIn')}>
-                     <Octicons name="sign-in" size={18} color={Colors.white} />
-                     <Text style={[{ color: Colors.white, margin: 5 }, Styles.lightText]}>Log In</Text>
-                  </TouchableOpacity>
-               </View>
             </View>
-            {/* {toast && (<MassageTostar text={toastMsg} />)} */}
+
+            <ButtonComponent filled
+               btnStyle={{ paddingVertical: 15 }}
+               text="Sign up" handle={handleSubmit(handelRegister)}
+               submitLoading={isSubmitting} />
+
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
+               <Text style={[{ color: Colors.white, margin: 5 }, Styles.lightText]}>
+                  Already have an account?
+                  </Text>
+               <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} onPress={() => navigation.replace('SignIn')}>
+                  <Text style={[{ color: Colors.white, margin: 5 }, Styles.BoldText]}>Log In</Text>
+               </TouchableOpacity>
+            </View>
          </View>
+         {/* {toast && (<MassageTostar text={toastMsg} />)} */}
       </ScrollView>
    )
 }
