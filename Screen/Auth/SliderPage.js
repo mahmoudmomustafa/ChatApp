@@ -1,5 +1,6 @@
 import React from 'react';
-import { Dimensions, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
+import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import FirstImageSlider from '../../components/Icons/FirstImageSlider';
 import SecondImageSlider from '../../components/Icons/SecondImageSlider';
 import ThirdImageSlider from '../../components/Icons/ThirdImageSlider';
@@ -7,18 +8,23 @@ import Colors from '../../Constants/Colors';
 import Styles from '../../Constants/Styles';
 
 const SliderPage = ({ navigation }) => {
+
+   const handleNavigation = (route) => {
+      navigation.replace(route)
+   }
+
    return (
       <ScrollView style={styles.container}
          showsHorizontalScrollIndicator={false}
          pagingEnabled={true} horizontal>
 
          <View style={styles.sliderContainer}>
-            <FirstImageSlider wdith={500} height={500} />
+            <FirstImageSlider wdith={400} height={400} />
             <Text style={[Styles.mediumText, Styles.header]}>Haaa !!</Text>
          </View>
 
          <View style={styles.sliderContainer}>
-            <SecondImageSlider wdith={500} height={500} />
+            <SecondImageSlider wdith={400} height={400} />
             <Text style={[Styles.mediumText, Styles.header]}>Waait wait wait..</Text>
             <Text style={[Styles.mediumText, Styles.header]}>Hi!</Text>
             <Text style={[Styles.mediumText, Styles.header]}>Welcome To Chat app.</Text>
@@ -26,20 +32,17 @@ const SliderPage = ({ navigation }) => {
 
 
          <View style={styles.sliderContainer}>
-            <ThirdImageSlider wdith={500} height={500} />
-            <Text style={[Styles.mediumText, Styles.header]}>Ready to try it?!</Text>
-            <View style={[Styles.flexRow,{marginTop:10}]}>
-               <TouchableHighlight 
-               underlayColor={Colors.borderColor}
-               style={{backgroundColor:'#3d3d3d',borderRadius:15,padding:15,margin:5}}>
-                  <Text style={[{color:Colors.white,fontSize:16},Styles.lightText]}>Sign up</Text>
-               </TouchableHighlight>
-               <TouchableHighlight 
-               underlayColor={Colors.borderColor}
-               style={{backgroundColor:'#3d3d3d',borderRadius:15,padding:15,margin:5}}>
-                  <Text style={[{color:Colors.white,fontSize:16},Styles.lightText]}>Sign in</Text>
-               </TouchableHighlight>
-            </View>
+            <ThirdImageSlider wdith={400} height={400} />
+            <Text style={[Styles.mediumText, Styles.header, { marginBottom: 15 }]}>Ready to try it?!</Text>
+
+            <ButtonComponent filled text="Sign Up"
+               btnStyle={{ width: 150 }}
+               handleNavigation={() => handleNavigation('SignUp')} />
+
+            <ButtonComponent filled text="Sign In"
+               btnStyle={{ width: 150 }}
+               handleNavigation={() => handleNavigation('SignIn')} />
+
          </View>
 
       </ScrollView>
