@@ -7,6 +7,8 @@ import Home from "../Screen/Home";
 import SliderPage from "../Screen/Auth/SliderPage";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthContext from "../components/Context/AuthContext";
+import SignUp from "../Screen/Auth/SignUp";
+import SignIn from "../Screen/Auth/SignIn";
 
 const Stack = createStackNavigator();
 const Route = () => {
@@ -101,6 +103,8 @@ function AuthStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Sliders" component={SliderPage} options={{ headerShown: false }} />
+      <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
+      <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }
