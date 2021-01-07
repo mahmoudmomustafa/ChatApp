@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
-import { useFontsm, Mansalva_400Regular } from '@expo-google-fonts/mansalva';
+import { useFont, Mansalva_400Regular } from '@expo-google-fonts/mansalva';
 export default function useCachedResources() {
    const [isLoadingComplete, setLoadingComplete] = useState(false);
 

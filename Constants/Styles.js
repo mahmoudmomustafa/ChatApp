@@ -3,24 +3,22 @@ import Colors from "./Colors";
 export default {
    lightText:{
       fontWeight : '100',
-      fontFamily:'FuturaPTLight'
+      fontFamily:'Mansalva_Regular'
    },
    mediumText:{
       fontWeight : '500',
-      fontFamily:'FuturaPTMedium'
+      fontFamily:'Mansalva_Regular'
    },
    BoldText:{
-      fontWeight : '700',
-      fontFamily:'FuturaPTBold'
+      fontWeight : '800',
+      fontFamily:'Mansalva_Regular'
    },
    header:{
-      fontFamily:'FuturaPTDemi'
-   },
-   bookText:{
-      fontFamily:'FuturaPTBook',
+      fontSize:30,
+      color:Colors.white
    },
    smallLink:{
-      fontFamily:'FuturaPTBook',
+      fontFamily:'Mansalva_Regular',
       fontSize: 11,
       textDecorationLine: 'underline'
    },

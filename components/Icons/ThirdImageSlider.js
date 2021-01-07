@@ -2,13 +2,13 @@ import * as React from "react"
 import Svg, { G, Path } from "react-native-svg"
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
-function SvgComponent(props) {
+function ThirdImageSlider(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 933.25 860.2"
-      width="1em"
-      height="1em"
+      width={250}
+      height={250}
       {...props}
     >
       <G data-name="Layer 2">
@@ -312,5 +312,4 @@ function SvgComponent(props) {
   )
 }
 
-const ThirdImageSlider = React.memo(SvgComponent)
 export default ThirdImageSlider

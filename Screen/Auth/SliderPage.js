@@ -1,29 +1,33 @@
 import React from 'react';
 import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
-import Colors from '../../../Petopia/constants/Colors';
 import FirstImageSlider from '../../components/Icons/FirstImageSlider';
 import SecondImageSlider from '../../components/Icons/SecondImageSlider';
 import ThirdImageSlider from '../../components/Icons/ThirdImageSlider';
+import Colors from '../../Constants/Colors';
+import Styles from '../../Constants/Styles';
 
 const SliderPage = ({ navigation }) => {
    return (
-      <ScrollView style={styles.container} pagingEnabled>
+      <ScrollView style={styles.container}
+         showsHorizontalScrollIndicator={false}
+         pagingEnabled={true} horizontal>
+
          <View style={styles.sliderContainer}>
-            <FirstImageSlider />
-            <Text>Haaa !!</Text>
+            <FirstImageSlider wdith={500} height={500} />
+            <Text style={[Styles.mediumText, Styles.header]}>Haaa !!</Text>
          </View>
 
          <View style={styles.sliderContainer}>
-            <SecondImageSlider />
-            <Text>Waait wait wait..</Text>
-            <Text>Hi!</Text>
-            <Text>Wlecome To Chat app.</Text>
+            <SecondImageSlider wdith={500} height={500} />
+            <Text style={[Styles.mediumText, Styles.header]}>Waait wait wait..</Text>
+            <Text style={[Styles.mediumText, Styles.header]}>Hi!</Text>
+            <Text style={[Styles.mediumText, Styles.header]}>Welcome To Chat app.</Text>
          </View>
 
 
          <View style={styles.sliderContainer}>
-            <ThirdImageSlider />
-            <Text>Ready to try it?!</Text>
+            <ThirdImageSlider wdith={500} height={500} />
+            <Text style={[Styles.mediumText, Styles.header]}>Ready to try it?!</Text>
          </View>
 
       </ScrollView>
@@ -33,13 +37,12 @@ const SliderPage = ({ navigation }) => {
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: Colors.white,
-      alignItems: 'center',
-      justifyContent: 'center',
+      backgroundColor: Colors.dark
    },
    sliderContainer: {
+      flex: 1,
       width: Dimensions.get('screen').width,
-      flexDirection: 'row',
+      height: Dimensions.get('screen').height,
       alignItems: 'center',
       justifyContent: 'center'
    }

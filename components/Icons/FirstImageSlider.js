@@ -1,13 +1,13 @@
 import * as React from "react"
 import Svg, { Path, G, Circle } from "react-native-svg"
 
-function SvgComponent(props) {
+function FirstImageSlider(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 449.9 600"
-      width="1em"
-      height="1em"
+      width={250}
+      height={250}
       {...props}
     >
       <Path
@@ -78,5 +78,4 @@ function SvgComponent(props) {
   )
 }
 
-const FirstImageSlider = React.memo(SvgComponent)
 export default FirstImageSlider
