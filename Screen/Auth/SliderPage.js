@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import FirstImageSlider from '../../components/Icons/FirstImageSlider';
 import SecondImageSlider from '../../components/Icons/SecondImageSlider';
 import ThirdImageSlider from '../../components/Icons/ThirdImageSlider';
@@ -28,6 +28,18 @@ const SliderPage = ({ navigation }) => {
          <View style={styles.sliderContainer}>
             <ThirdImageSlider wdith={500} height={500} />
             <Text style={[Styles.mediumText, Styles.header]}>Ready to try it?!</Text>
+            <View style={[Styles.flexRow,{marginTop:10}]}>
+               <TouchableHighlight 
+               underlayColor={Colors.borderColor}
+               style={{backgroundColor:'#3d3d3d',borderRadius:15,padding:15,margin:5}}>
+                  <Text style={[{color:Colors.white,fontSize:16},Styles.lightText]}>Sign up</Text>
+               </TouchableHighlight>
+               <TouchableHighlight 
+               underlayColor={Colors.borderColor}
+               style={{backgroundColor:'#3d3d3d',borderRadius:15,padding:15,margin:5}}>
+                  <Text style={[{color:Colors.white,fontSize:16},Styles.lightText]}>Sign in</Text>
+               </TouchableHighlight>
+            </View>
          </View>
 
       </ScrollView>
