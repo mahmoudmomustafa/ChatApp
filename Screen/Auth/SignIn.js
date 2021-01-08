@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from
 import InputComponent from '../../components/InputComponent/InputComponent';
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import Colors from '../../Constants/Colors';
-// import { MassageTostar } from '../../components/Toaster';
 // import AsyncStorage from '@react-native-community/async-storage';
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -32,7 +31,6 @@ const SignIn = ({ navigation }) => {
          .then(user => {
             console.log(user);
          }).catch(error => {
-            console.log(error);
             setToast(true)
             setToastMsg(error.message)
          });

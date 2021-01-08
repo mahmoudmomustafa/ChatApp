@@ -3,16 +3,17 @@ import { Text, View, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from
 import InputComponent from '../../components/InputComponent/InputComponent';
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import Colors from '../../Constants/Colors';
-// import { MassageTostar } from '../../components/Toaster';
-// import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Styles from '../../Constants/Styles';
-import { Octicons } from '@expo/vector-icons';
 import SignUpImage from '../../components/Icons/SignUpImage';
+import ModalMessage from '../../components/ModalMessage/ModalMessage';
+import firebase from '../../firebase';
+
 const RegisterSchme = yup.object().shape({
-   username: yup.string().min(4).required("username is required"),
+   username: yup.string().min(4).required("Name is required"),
    email: yup.string().email('Email address is invalid.').required("Email Address is required"),
    password: yup.string().min(8).required("Password is required"),
    password_confirmation: yup.mixed().oneOf([yup.ref('password')], "Passwords don't match!").required('Confirm password is required'),
@@ -22,12 +23,26 @@ const SignUp = ({ navigation }) => {
    const [toast, setToast] = useState(false)
    const [toastMsg, setToastMsg] = useState('')
 
-   const { register, control, handleSubmit, errors, isSubmitting } = useForm({
+   const { control, handleSubmit, errors, isSubmitting } = useForm({
       resolver: yupResolver(RegisterSchme)
    });
 
    const handelRegister = async (values) => {
-      console.log(values);
+      firebase.auth()
+         .createUserWithEmailAndPassword(values.email, values.password)
+         .then(user => {
+            firebase
+               .firestore()
+               .collection("users")
+               .doc(user.user.uid)
+               .set({ name: values.username, email: values.email });
+         })
+         .then(user => {
+            //   this.$router.replace("chat");
+         }).catch(error => {
+            setToast(true)
+            setToastMsg(error.message)
+         });
    };
 
    return (
@@ -51,7 +66,7 @@ const SignUp = ({ navigation }) => {
                   render={({ onChange, onBlur, value }) => (
                      <InputComponent
                         inputType="name"
-                        placeholderText="UserName"
+                        placeholderText="Full name"
                         blur={onBlur}
                         change={value => onChange(value)}
                         inputValue={value}
@@ -128,7 +143,9 @@ const SignUp = ({ navigation }) => {
                </TouchableOpacity>
             </View>
          </View>
-         {/* {toast && (<MassageTostar text={toastMsg} />)} */}
+         {toast && (<ModalMessage text={toastMsg}
+            transparent modalState={toast}
+            cancelClicked={() => setToast(false)} />)}
       </ScrollView>
    )
 }
