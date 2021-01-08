@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Text, View, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import InputComponent from '../../components/InputComponent/InputComponent';
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import Colors from '../../Constants/Colors';
-import AsyncStorage from '@react-native-community/async-storage';
+// import AsyncStorage from '@react-native-community/async-storage';
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -11,6 +11,7 @@ import Styles from '../../Constants/Styles';
 import SignUpImage from '../../components/Icons/SignUpImage';
 import ModalMessage from '../../components/ModalMessage/ModalMessage';
 import firebase from '../../firebase';
+import AuthContext from '../../components/Context/AuthContext';
 
 const RegisterSchme = yup.object().shape({
    username: yup.string().min(4).required("Name is required"),
@@ -20,26 +21,29 @@ const RegisterSchme = yup.object().shape({
 });
 
 const SignUp = ({ navigation }) => {
+   const userContext = useContext(AuthContext);
    const [toast, setToast] = useState(false)
    const [toastMsg, setToastMsg] = useState('')
+   const [isSubmitting, setisSubmitting] = useState(false)
 
-   const { control, handleSubmit, errors, isSubmitting } = useForm({
+   const { control, handleSubmit, errors } = useForm({
       resolver: yupResolver(RegisterSchme)
    });
 
    const handelRegister = async (values) => {
+      setisSubmitting(true)
       firebase.auth()
          .createUserWithEmailAndPassword(values.email, values.password)
          .then(user => {
+            setisSubmitting(false)
+            userContext.signIn(user);
             firebase
                .firestore()
                .collection("users")
                .doc(user.user.uid)
                .set({ name: values.username, email: values.email });
-         })
-         .then(user => {
-            //   this.$router.replace("chat");
          }).catch(error => {
+            setisSubmitting(false)
             setToast(true)
             setToastMsg(error.message)
          });

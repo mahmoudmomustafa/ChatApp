@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Text, View, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import InputComponent from '../../components/InputComponent/InputComponent';
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
@@ -11,6 +11,7 @@ import Styles from '../../Constants/Styles';
 import SignInImage from '../../components/Icons/SignInImage';
 import firebase from '../../firebase';
 import ModalMessage from '../../components/ModalMessage/ModalMessage';
+import AuthContext from '../../components/Context/AuthContext';
 
 const RegisterSchme = yup.object().shape({
    email: yup.string().email('Email address is invalid.').required("Email Address is required"),
@@ -20,18 +21,23 @@ const RegisterSchme = yup.object().shape({
 const SignIn = ({ navigation }) => {
    const [toast, setToast] = useState(false)
    const [toastMsg, setToastMsg] = useState('')
+   const userContext = useContext(AuthContext);
+   const [isSubmitting, setisSubmitting] = useState(false)
 
-   const { control, handleSubmit, errors, isSubmitting } = useForm({
+   const { control, handleSubmit, errors } = useForm({
       resolver: yupResolver(RegisterSchme)
    });
 
    const handelLogin = async (values) => {
+      setisSubmitting(true)
       firebase.auth()
          .signInWithEmailAndPassword(values.email, values.password)
          .then(user => {
-            console.log(user);
+            setisSubmitting(false)
+            userContext.signIn(user);
          }).catch(error => {
             setToast(true)
+            setisSubmitting(false)
             setToastMsg(error.message)
          });
    };
