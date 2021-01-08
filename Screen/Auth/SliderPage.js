@@ -36,11 +36,11 @@ const SliderPage = ({ navigation }) => {
             <Text style={[Styles.span, Styles.header, { marginBottom: 15 }]}>Ready to try it?!</Text>
 
             <ButtonComponent filled text="Sign Up"
-               btnStyle={{ width: 150 }} 
+               btnStyle={{ width: 150 }}
                handle={() => handleNavigation('SignUp')} />
 
             <ButtonComponent filled text="Sign In"
-               btnStyle={{ width: 150 }} 
+               btnStyle={{ width: 150 }}
                handle={() => handleNavigation('SignIn')} />
 
          </View>

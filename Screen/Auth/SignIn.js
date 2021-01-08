@@ -9,8 +9,9 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Styles from '../../Constants/Styles';
-import { Octicons } from '@expo/vector-icons';
 import SignInImage from '../../components/Icons/SignInImage';
+import firebase from '../../firebase';
+import ModalMessage from '../../components/ModalMessage/ModalMessage';
 
 const RegisterSchme = yup.object().shape({
    email: yup.string().email('Email address is invalid.').required("Email Address is required"),
@@ -21,17 +22,25 @@ const SignIn = ({ navigation }) => {
    const [toast, setToast] = useState(false)
    const [toastMsg, setToastMsg] = useState('')
 
-   const { register, control, handleSubmit, errors, isSubmitting } = useForm({
+   const { control, handleSubmit, errors, isSubmitting } = useForm({
       resolver: yupResolver(RegisterSchme)
    });
 
    const handelLogin = async (values) => {
-      console.log(values);
+      firebase.auth()
+         .signInWithEmailAndPassword(values.email, values.password)
+         .then(user => {
+            console.log(user);
+         }).catch(error => {
+            console.log(error);
+            setToast(true)
+            setToastMsg(error.message)
+         });
    };
 
    return (
       <ScrollView style={styles.container}>
-         <View style={{ padding: 16, justifyContent: 'space-evenly', height: Dimensions.get('screen').height - 42}}>
+         <View style={{ padding: 16, justifyContent: 'space-evenly', height: Dimensions.get('screen').height - 42 }}>
 
             <View>
                <Text style={[{ fontSize: 35, color: Colors.white, paddingVertical: 5 }, Styles.BoldText]}>Let's sign you in.</Text>
@@ -39,9 +48,9 @@ const SignIn = ({ navigation }) => {
                <Text style={[{ fontSize: 25, color: Colors.white, paddingVertical: 5 }, Styles.mediumText]}>You 've been missed!</Text>
             </View>
 
-<View style={{alignItems:'center',justifyContent:'center'}}>
-         <SignInImage />
-</View>
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+               <SignInImage />
+            </View>
 
             <View>
                {/* email input */}
@@ -89,12 +98,14 @@ const SignIn = ({ navigation }) => {
                <Text style={[{ color: Colors.white, margin: 5 }, Styles.lightText]}>
                   New member ?
                </Text>
-               <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} onPress={() => navigation.replace('SignUp')}>
+               <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} onPress={() => navigation.navigate('SignUp')}>
                   <Text style={[{ color: Colors.white, margin: 5 }, Styles.mediumText]}>Sign Up</Text>
                </TouchableOpacity>
             </View>
          </View>
-         {/* {toast && (<MassageTostar text={toastMsg} />)} */}
+         {toast && (<ModalMessage text={toastMsg}
+            transparent modalState={toast}
+            cancelClicked={() => setToast(false)} />)}
       </ScrollView>
    )
 }

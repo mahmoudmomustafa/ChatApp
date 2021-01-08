@@ -1,9 +1,22 @@
-import React from 'react'
-import { Text, TextInput, StyleSheet } from 'react-native';
+import React, { useRef } from 'react'
+import { useEffect } from 'react';
+import { Animated, TextInput, StyleSheet } from 'react-native';
 import Colors from '../../Constants/Colors';
 import Styles from '../../Constants/Styles';
 
 const InputComponent = (props) => {
+   const fadeAnim = useRef(new Animated.Value(1000)).current;
+
+   useEffect(() => {
+      Animated.spring(fadeAnim, {
+         toValue: !props.errors ? 10 : 0,
+         velocity: 2,
+         tension: 2,
+         friction: 8,
+         useNativeDriver: true,
+      }).start();
+   }, [props.errors])
+
    return (
       <>
          <TextInput
@@ -20,7 +33,8 @@ const InputComponent = (props) => {
             keyboardType={props.keyboard ? props.keyboard : 'default'}
          />
          {props.errors && (
-            <Text style={Styles.errorText}>{props.errors}</Text>
+            <Animated.Text style={[Styles.errorText, { transform: [{ translateY: fadeAnim }] }
+            ]}>{props.errors}</Animated.Text>
          )}
       </>
    )
@@ -35,7 +49,7 @@ const styles = StyleSheet.create({
       opacity: 0.9,
       borderRadius: 5,
       marginVertical: 10,
-      color:Colors.white
+      color: Colors.white
    }
 })
 
