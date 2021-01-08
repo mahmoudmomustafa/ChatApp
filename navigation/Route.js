@@ -11,31 +11,11 @@ import SignUp from "../Screen/Auth/SignUp";
 import SignIn from "../Screen/Auth/SignIn";
 import Colors from "../Constants/Colors";
 import firebase from '../firebase';
+import UserReducer from "../hooks/UserReducer";
 
 const Stack = createStackNavigator();
 const Route = () => {
-  const [state, dispatch] = useReducer(
-    (prevState, action) => {
-      switch (action.type) {
-        case 'RESTORE_USER':
-          return {
-            ...prevState,
-            user: action.user,
-          };
-        case 'SIGN_IN':
-          return {
-            ...prevState,
-            isSignout: false,
-            user: action.user,
-          };
-        case 'SIGN_OUT':
-          return {
-            ...prevState,
-            isSignout: true,
-            user: null,
-          };
-      }
-    },
+  const [state, dispatch] = useReducer(UserReducer,
     {
       isSignout: false,
       user: null,
@@ -60,8 +40,14 @@ const Route = () => {
       signIn: async data => {
         dispatch({ type: 'SIGN_IN', user: data.user });
       },
-      signOut: () => dispatch({ type: 'SIGN_OUT' })
-    }), []);
+      signOut: () => dispatch({ type: 'SIGN_OUT' }),
+      setData: async data => {
+        dispatch({ type: 'SET_DATA', userData: data });
+      },
+      getData: () => {
+        return state
+      },
+    }), [state]);
 
   return (
     <AuthContext.Provider value={authContext}>
