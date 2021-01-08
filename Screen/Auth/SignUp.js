@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from
 import InputComponent from '../../components/InputComponent/InputComponent';
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import Colors from '../../Constants/Colors';
-// import AsyncStorage from '@react-native-community/async-storage';
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -12,6 +11,7 @@ import SignUpImage from '../../components/Icons/SignUpImage';
 import ModalMessage from '../../components/ModalMessage/ModalMessage';
 import firebase from '../../firebase';
 import AuthContext from '../../components/Context/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RegisterSchme = yup.object().shape({
    username: yup.string().min(4).required("Name is required"),
@@ -36,10 +36,9 @@ const SignUp = ({ navigation }) => {
          .createUserWithEmailAndPassword(values.email, values.password)
          .then(user => {
             setisSubmitting(false)
-            userContext.signIn(user);
-            firebase
-               .firestore()
-               .collection("users")
+            AsyncStorage.setItem('userToken', user.user.refreshToken)
+            userContext.signIn(user.user.refreshToken);
+            firebase.firestore().collection("users")
                .doc(user.user.uid)
                .set({ name: values.username, email: values.email });
          }).catch(error => {

@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import AuthContext from '../components/Context/AuthContext';
@@ -9,24 +10,19 @@ export default function Home() {
   const [user, setUser] = useState({})
 
   useEffect(() => {
-    firebase.firestore().collection("users")
-      .doc(firebase.auth().currentUser.uid)
-      .get().then(doc => {
-        userContext.setData(doc.data())
-        setUser(doc.data())
-      });
-
-  }, [])
+    setUser(userContext.getData);
+  }, [userContext.getData])
 
   return (
     <View style={styles.container}>
-      <Text style={{color:Colors.white,fontSize:25}}>Welcome {user.name}</Text>
+      <Text style={{ color: Colors.white, fontSize: 25 }}>Welcome {user?.name}</Text>
       <TouchableOpacity onPress={() => {
         firebase.auth().signOut().then(() => {
+          AsyncStorage.removeItem('userToken')
           userContext.signOut();
         })
       }}>
-        <Text style={{color:Colors.white}}>Log out</Text>
+        <Text style={{ color: Colors.white }}>Log out</Text>
       </TouchableOpacity>
     </View>
   );

@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from
 import InputComponent from '../../components/InputComponent/InputComponent';
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import Colors from '../../Constants/Colors';
-// import AsyncStorage from '@react-native-community/async-storage';
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -12,6 +11,7 @@ import SignInImage from '../../components/Icons/SignInImage';
 import firebase from '../../firebase';
 import ModalMessage from '../../components/ModalMessage/ModalMessage';
 import AuthContext from '../../components/Context/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RegisterSchme = yup.object().shape({
    email: yup.string().email('Email address is invalid.').required("Email Address is required"),
@@ -34,7 +34,8 @@ const SignIn = ({ navigation }) => {
          .signInWithEmailAndPassword(values.email, values.password)
          .then(user => {
             setisSubmitting(false)
-            userContext.signIn(user);
+            AsyncStorage.setItem('userToken', user.user.refreshToken)
+            userContext.signIn(user.user.refreshToken);
          }).catch(error => {
             setToast(true)
             setisSubmitting(false)

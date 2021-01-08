@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -9,53 +9,59 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthContext from "../components/Context/AuthContext";
 import SignUp from "../Screen/Auth/SignUp";
 import SignIn from "../Screen/Auth/SignIn";
-import Colors from "../Constants/Colors";
 import firebase from '../firebase';
 import UserReducer from "../hooks/UserReducer";
 
 const Stack = createStackNavigator();
+
 const Route = () => {
-  const [state, dispatch] = useReducer(UserReducer,
-    {
-      isSignout: false,
-      user: null,
-    }
-  );
+  const [state, dispatch] = useReducer(UserReducer, { isSignout: false, user: null });
 
   useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
-      firebase.auth().onAuthStateChanged(user => {
-        if (user != null) {
-          dispatch({ type: 'RESTORE_USER', user: user })
-        }
-      });
+      let userToken = await AsyncStorage.getItem('userToken');
+      authContext.signIn(userToken)
+      getData
     };
 
     bootstrapAsync();
   }, []);
 
+  const getData = React.useMemo(async () => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user != null) {
+        dispatch({ type: 'RESTORE_USER', user: user.refreshToken })
+        firebase.firestore().collection("users")
+          .doc(firebase.auth().currentUser.uid)
+          .get().then(doc => {
+            authContext.setData(doc.data())
+          });
+      }
+    });
+  }, [state.userToken]);
+
   const authContext = React.useMemo(
     () => ({
       signIn: async data => {
-        dispatch({ type: 'SIGN_IN', user: data.user });
+        dispatch({ type: 'SIGN_IN', userToken: data });
       },
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
       setData: async data => {
-        dispatch({ type: 'SET_DATA', userData: data });
+        dispatch({ type: 'SET_DATA', user: data });
       },
-      getData: () => {
-        return state
-      },
+      getData: state.user
     }), [state]);
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        {
-          state.user ? <HomeStack /> : <AuthStack />
-        }
-      </NavigationContainer>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          {
+            state.userToken ? <HomeStack /> : <AuthStack />
+          }
+        </NavigationContainer>
+      </SafeAreaProvider>
     </AuthContext.Provider>
   );
 };
