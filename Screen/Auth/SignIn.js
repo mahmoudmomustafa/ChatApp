@@ -22,25 +22,19 @@ const SignIn = ({ navigation }) => {
    const [toast, setToast] = useState(false)
    const [toastMsg, setToastMsg] = useState('')
    const userContext = useContext(AuthContext);
-   const [isSubmitting, setisSubmitting] = useState(false)
 
-   const { control, handleSubmit, errors } = useForm({
+   const { control, handleSubmit, errors, formState: { isSubmitting } } = useForm({
       resolver: yupResolver(RegisterSchme)
    });
 
    const handelLogin = async (values) => {
-      setisSubmitting(true)
-      firebase.auth()
-         .signInWithEmailAndPassword(values.email, values.password)
-         .then(user => {
-            setisSubmitting(false)
-            AsyncStorage.setItem('userToken', user.user.refreshToken)
-            userContext.signIn(user.user.refreshToken);
-         }).catch(error => {
-            setToast(true)
-            setisSubmitting(false)
-            setToastMsg(error.message)
-         });
+      firebase.auth().signInWithEmailAndPassword(values.email, values.password).then(user => {
+         AsyncStorage.setItem('userToken', user.user.refreshToken)
+         userContext.signIn(user.user.refreshToken);
+      }).catch(error => {
+         setToast(true)
+         setToastMsg(error.message)
+      });
    };
 
    return (
