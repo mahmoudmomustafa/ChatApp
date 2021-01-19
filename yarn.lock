@@ -5698,7 +5698,7 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
-react-native-gesture-handler@^1.9.0:
+react-native-gesture-handler@^1.8.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.9.0.tgz#e441b1c0277c3fd4ca3e5c58fdd681e2f0ceddf0"
   integrity sha512-fkkNeWDBzDdwDxDcxtYbrb9T1g0PLgT1AxBs2iO/p7uEbDbC6mIoL/NzuOnKNEBHcd0lpLoJuNmIfdmucEON5g==
@@ -5726,10 +5726,10 @@ react-native-safe-area-context@3.1.9, react-native-safe-area-context@^3.1.9:
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.1.9.tgz#48864ea976b0fa57142a2cc523e1fd3314e7247e"
   integrity sha512-wmcGbdyE/vBSL5IjDPReoJUEqxkZsywZw5gPwsVUV1NBpw5eTIdnL6Y0uNKHE25Z661moxPHQz6kwAkYQyorxA==
 
-react-native-screens@^2.16.1:
-  version "2.16.1"
-  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.16.1.tgz#b105a127378d90018a46daf0c2f6518fca60c06f"
-  integrity sha512-WZ7m0sBDVaHbBnlHxwQnUlI6KNfQKHq+Unfw+VBuAlnSXvT+aw6Bb/K2bUlHzBgvrPjwY3Spc7ZERFuTwRLLwg==
+react-native-screens@^2.15.0:
+  version "2.15.1"
+  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.15.1.tgz#f7512932ecff7327b57fb0bda58e49e9bf8ee5f2"
+  integrity sha512-cdcBHLizteH0RNn6QSw0ftQWWsAjolte/uuISoDBfllxka7sabT1i56C2Wus25KGGowaYT3DEz0zMFunS2GNJQ==
 
 react-native-svg@12.1.0:
   version "12.1.0"
