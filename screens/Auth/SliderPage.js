@@ -4,8 +4,8 @@ import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import FirstImageSlider from '../../components/Icons/FirstImageSlider';
 import SecondImageSlider from '../../components/Icons/SecondImageSlider';
 import ThirdImageSlider from '../../components/Icons/ThirdImageSlider';
-import Colors from '../../Constants/Colors';
-import Styles from '../../Constants/Styles';
+import Colors from '../../constants/Colors';
+import Styles from '../../constants/Styles';
 
 const SliderPage = ({ navigation }) => {
 

@@ -3,13 +3,13 @@ import React, { useEffect, useReducer } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import Home from "../Screen/Home";
-import SliderPage from "../Screen/Auth/SliderPage";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AuthContext from "../components/Context/AuthContext";
-import SignUp from "../Screen/Auth/SignUp";
-import SignIn from "../Screen/Auth/SignIn";
 import firebase from '../firebase';
+import Home from "../screens/Home";
+import SliderPage from "../screens/Auth/SliderPage";
+import AuthContext from "../components/Context/AuthContext";
+import SignUp from "../screens/Auth/SignUp";
+import SignIn from "../screens/Auth/SignIn";
 import UserReducer from "../hooks/UserReducer";
 
 const Stack = createStackNavigator();

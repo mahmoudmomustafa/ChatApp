@@ -1,17 +1,17 @@
 import React, { useContext, useState } from 'react'
 import { Text, View, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
-import InputComponent from '../../components/InputComponent/InputComponent';
-import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
-import Colors from '../../Constants/Colors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import Styles from '../../Constants/Styles';
+import firebase from '../../firebase';
+import InputComponent from '../../components/InputComponent/InputComponent';
+import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import SignUpImage from '../../components/Icons/SignUpImage';
 import ModalMessage from '../../components/ModalMessage/ModalMessage';
-import firebase from '../../firebase';
 import AuthContext from '../../components/Context/AuthContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import Colors from '../../constants/Colors';
+import Styles from '../../constants/Styles';
 
 const RegisterSchme = yup.object().shape({
    username: yup.string().min(4).required("Name is required"),

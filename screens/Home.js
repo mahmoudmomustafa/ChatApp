@@ -1,9 +1,9 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthContext from '../components/Context/AuthContext';
-import Colors from '../Constants/Colors';
 import firebase from '../firebase';
+import Colors from '../constants/Colors';
 
 export default function Home() {
   const userContext = useContext(AuthContext);
